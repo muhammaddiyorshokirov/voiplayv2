@@ -115,7 +115,7 @@ class ApiService {
       final List<dynamic> data = json.decode(response.body)['data'];
       return data.map((json) => Episode.fromJson(json)).toList();
     } else {
-      throw Exception('Yaqinda qo‘shilgan qismlarni yuklab bo‘lmadi');
+      throw Exception('Yaqinda qo‘shilgan episodelarni yuklab bo‘lmadi');
     }
   }
 }

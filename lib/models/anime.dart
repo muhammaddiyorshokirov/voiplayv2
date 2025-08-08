@@ -43,12 +43,12 @@ class Anime {
       description: json['description'] ?? '',
       studio: json['studio'] ?? '',
       language: json['language'] ?? 'en',
-      releaseYear: json['release_year'] ?? 0,
+      releaseYear: int.tryParse(json['release_year'].toString()) ?? 0,
       duration: json['duration']?.toString() ?? '0',
       status: json['status'] ?? 'completed',
-      rating: json['rating']?.toDouble() ?? 0.0,
-      isPremium: json['is_premium'] == 1,
-      views: json['views'] ?? 0,
+      rating: double.tryParse(json['rating'].toString()) ?? 0.0,
+      isPremium: json['is_premium'].toString() == '1',
+      views: int.tryParse(json['views'].toString()) ?? 0,
       createdAt: DateTime.parse(json['created_at']),
     );
   }

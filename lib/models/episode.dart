@@ -40,19 +40,20 @@ class Episode {
       id: json['id'].toString(),
       animeId: json['anime_id'].toString(),
       title: json['title'] ?? 'No title',
-      episodeNumber: json['episode_number'],
+      episodeNumber: json['episode_number'] != null
+          ? int.tryParse(json['episode_number'].toString())
+          : null,
       description: json['description'] ?? '',
       videoUrl: json['video_url'] ?? '',
       thumbnail: json['thumbnail'] ?? '',
-      duration: json['duration'] ?? 0,
-      isPremium: json['is_premium'] == 1,
-      views: json['views'] ?? 0,
-      likes: json['likes'] ?? 0,
-      dislikes: json['dislikes'] ?? 0,
+      duration: int.tryParse(json['duration'].toString()) ?? 0,
+      isPremium: json['is_premium'].toString() == '1',
+      views: int.tryParse(json['views'].toString()) ?? 0,
+      likes: int.tryParse(json['likes'].toString()) ?? 0,
+      dislikes: int.tryParse(json['dislikes'].toString()) ?? 0,
       language: json['language'] ?? 'en',
       episodeType: json['episode_type'] ?? 'standard',
-      releaseDate:
-          DateTime.parse(json['release_date'] ?? DateTime.now().toString()),
+      releaseDate: DateTime.tryParse(json['release_date'] ?? '') ?? DateTime.now(),
       createdAt: DateTime.parse(json['created_at']),
     );
   }
