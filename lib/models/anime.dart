@@ -50,27 +50,29 @@ class Anime {
 
   factory Anime.fromJson(Map<String, dynamic> json) {
     return Anime(
-      id: json['id'],
-      title: json['title'],
-      slug: json['slug'],
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      slug: json['slug'] ?? '',
       image: json['image'],
       coverImage: json['cover_image'],
       description: json['description'],
       studio: json['studio'],
       language: json['language'],
-      releaseYear: json['release_year'],
+      releaseYear: int.tryParse(json['release_year']?.toString() ?? '') ?? 0,
       duration: json['duration'],
       status: json['status'],
-      rating: json['rating'].toDouble(),
-      isPremium: json['is_premium'],
+      rating: double.tryParse(json['rating']?.toString() ?? '') ?? 0.0,
+      isPremium: json['is_premium'].toString() == '1',
       premiumUnlockAt: json['premium_unlock_at'],
-      views: json['views'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      views: int.tryParse(json['views']?.toString() ?? '') ?? 0,
+      createdAt: json['created_at'] ?? '',
+      updatedAt: json['updated_at'] ?? '',
       metaTitle: json['meta_title'],
       metaDescription: json['meta_description'],
       metaKeywords: json['meta_keywords'],
-      genres: json['genres'] != null ? List<String>.from(json['genres']) : null,
+      genres: json['genres'] != null
+          ? List<String>.from(json['genres'])
+          : null,
     );
   }
 }

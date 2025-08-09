@@ -12,17 +12,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<void> _fetchFuture;
+  Future<void> _fetchFuture = Future.value();
 
   @override
   void initState() {
     super.initState();
-    // Future ni initState ichida olish, shunda build har safar chaqirilganda fetch qilinmaydi
-    final animeController =
-        Provider.of<AnimeController>(context, listen: false);
-    _fetchFuture = animeController.fetchAllAnime();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final animeController =
+      Provider.of<AnimeController>(context, listen: false);
+      _fetchFuture = animeController.fetchAllAnime();
+      setState(() {});
+    });
   }
-
   @override
   Widget build(BuildContext context) {
     // listen true qilib qoldiramiz, shunda animeController.notifyListeners() UI yangilanadi
